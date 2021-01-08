@@ -6,6 +6,8 @@
 // - The input will always be solvable (there will be no missing parents)
 // - The input will always be valid JSON in the format of the example below, with no additional data
 // - There may be more than one root category (a category with no parents)
+// This solution places the catagories in order as required when the
+// parent_id is a larger number than its child in a case where id numbers are reused.
 // Date: 8 Jan 2021
 
 const inputJsonArray = [
@@ -36,8 +38,7 @@ const inputJsonArray = [
     },
 ]
 
-// module.exports =
-function sortCategoriesForInsert(inputJsonArray) {
+module.exports = function sortCategoriesForInsert(inputJsonArray) {
     const roots = inputJsonArray.filter((root) => {
         return root["parent_id"] === null;
     })
@@ -59,14 +60,8 @@ function sortCategoriesForInsert(inputJsonArray) {
                 let value1 = plist.find((s) => {
                     return s === nonroots[i]
                 })
-
-                if (value1 === undefined){
-                    console.log("----------Adding to the parent list----------")
-                    console.log(nonroots[i])
+                if (value1 === undefined) {
                     plist.push(nonroots[i])
-                }
-                else {
-                    console.log("----------DON'T add to the parent list----------")
                 }
             } else {
                 let value1 = plist.find((s) => {
@@ -75,14 +70,8 @@ function sortCategoriesForInsert(inputJsonArray) {
                 let value2 = clist.find((s) => {
                     return s === nonroots[i]
                 })
-
-                if (value1 === undefined && value2 === undefined){
-                    console.log("----------Adding to the child list----------")
-                    console.log(nonroots[i])
+                if (value1 === undefined && value2 === undefined) {
                     clist.push(nonroots[i])
-                }
-                else {
-                    console.log("----------DON'T add to the child list----------")
                 }
             }
         }
@@ -90,15 +79,12 @@ function sortCategoriesForInsert(inputJsonArray) {
 
     let properJsonOutput = [];
     properJsonOutput = properJsonOutput.concat(roots);
-    console.table(properJsonOutput)
     properJsonOutput = properJsonOutput.concat(plist)
-    console.table(properJsonOutput)
     properJsonOutput = properJsonOutput.concat(clist)
-    console.table(properJsonOutput)
-    properJsonOutput = [... new Set(properJsonOutput)]
+    properJsonOutput = [... new Set(properJsonOutput)] // Remove any duplicates
     return properJsonOutput
 }
 
-let result = sortCategoriesForInsert(inputJsonArray);
-console.log(result);
-console.table(result);
+// let result = sortCategoriesForInsert(inputJsonArray);
+// console.log(result);
+// console.table(result);

@@ -25,19 +25,18 @@ const inputJsonArray = [
         "parent_id": null,
     },
     {
-        "name": "dogs",
+        "name": "Dog",
         "id": 68,
         "parent_id": 1,
     },
     {
-        "name": "cats",
+        "name": "larger_parent_number_test_escape",
         "id": 56,
         "parent_id": 68,
     },
 ]
 
-//module.exports =
-function sortCategoriesForInsert(inputJsonArray) {
+module.exports = function sortCategoriesForInsert(inputJsonArray) {
     // Make the id's assending order
     let assending_order = inputJsonArray.sort((a, b) => {
         if (a["id"] > b["id"])
