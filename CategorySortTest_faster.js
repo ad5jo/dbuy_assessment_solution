@@ -24,9 +24,20 @@ const inputJsonArray = [
         "id": 20,
         "parent_id": null,
     },
+    {
+        "name": "dogs",
+        "id": 68,
+        "parent_id": 1,
+    },
+    {
+        "name": "cats",
+        "id": 56,
+        "parent_id": 68,
+    },
 ]
 
-module.exports = function sortCategoriesForInsert(inputJsonArray) {
+//module.exports =
+function sortCategoriesForInsert(inputJsonArray) {
     // Make the id's assending order
     let assending_order = inputJsonArray.sort((a, b) => {
         if (a["id"] > b["id"])
@@ -36,6 +47,7 @@ module.exports = function sortCategoriesForInsert(inputJsonArray) {
     })
     // Make the Roots first in the order. Leave everything else as-is
     // This works because we are given that no parents are missing
+    // (Assuming that the parent's id numbers are smaller than the child's id number)
     let properJsonOutput = assending_order.sort((a, b) => {
         if (a["parent_id"] === null)
             return -1
@@ -44,6 +56,6 @@ module.exports = function sortCategoriesForInsert(inputJsonArray) {
     return properJsonOutput
 }
 
-// let result = sortCategoriesForInsert(inputJsonArray);
-// console.log(result);
-// console.table(result);
+let result = sortCategoriesForInsert(inputJsonArray);
+console.log(result);
+console.table(result);
