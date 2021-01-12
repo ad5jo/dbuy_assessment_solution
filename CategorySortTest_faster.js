@@ -55,6 +55,6 @@ module.exports = function sortCategoriesForInsert(inputJsonArray) {
     return properJsonOutput
 }
 
-let result = sortCategoriesForInsert(inputJsonArray);
-console.log(result);
-console.table(result);
+// let result = sortCategoriesForInsert(inputJsonArray);
+// console.log(result);
+// console.table(result);
