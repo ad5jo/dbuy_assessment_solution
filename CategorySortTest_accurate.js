@@ -45,7 +45,6 @@ module.exports = function sortCategoriesForInsert(inputJsonArray) {
     const nonroots = inputJsonArray.filter((nonroot) => {
         return nonroot["parent_id"] !== null;
     })
-    // const parent = roots.concat(nonroots);
     let plist = [];
     let clist = [];
     let nrlen = nonroots.length
@@ -54,9 +53,6 @@ module.exports = function sortCategoriesForInsert(inputJsonArray) {
     for (let i = 0; i < nrlen; i++) {
         for (let ii = 0; ii < inputlen; ii++) {
             if (nonroots[i]["id"] === inputJsonArray[ii]["parent_id"]) {
-                // let res = plist.some((item,) => {
-                //     return item["id"]
-                // })
                 let value1 = plist.find((s) => {
                     return s === nonroots[i]
                 })
